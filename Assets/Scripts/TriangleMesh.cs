@@ -77,7 +77,7 @@ public class TriangleMesh : MonoBehaviour
     //Options
     public bool testCusick = true;
     public bool profiling = true;
-    private string exportPath = @"C:\Users\apari\Documents\GitHub\clothilde-unity-iri\Assets\Exports";
+    private string exportPath = @"C:\Users\maparicio\Documents\Abhilash Nayak\unity_clothilde\Assets\Exports";
     private bool isExporting = true;
     private List<float> elapsedTime;
     private List<float> simulateTime;

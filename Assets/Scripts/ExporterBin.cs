@@ -4,12 +4,13 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using Valve.VR;
 
 public class ExporterBin : MonoBehaviour
 {
     [Header("Settings")]
     public string targetTag = "Exportable"; // Only objects with this tag will be saved
-    private string exportPath = @"C:\Users\maparicio\Documents\My project\Assets\Exports";
+    private string exportPath = @"C:\Users\maparicio\Documents\Abhilash Nayak\unity_clothilde\Assets\Exports";
 
     [Header("Scene references")]
     public TriangleMesh cloth;
@@ -34,6 +35,11 @@ public class ExporterBin : MonoBehaviour
 
     private const int NGrippers = 2;
 
+    // To export
+    public SteamVR_Action_Boolean m_Export = null;
+    // Optional: explicitly specify the hand
+    public SteamVR_Input_Sources m_HandType = SteamVR_Input_Sources.RightHand;
+
     void Awake()
     {
         CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
@@ -41,7 +47,8 @@ public class ExporterBin : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        // if (Input.GetKeyDown(KeyCode.P))
+        if (m_Export != null && m_Export.GetStateDown(m_HandType))
         {
             if (!isExporting)
                 StartRecording();
@@ -79,7 +86,7 @@ public class ExporterBin : MonoBehaviour
 
         ExportMeshOnceBinary();
 
-        Debug.Log("Cloth + left/right gripper export started. Press P again to stop and save.");
+        Debug.Log("Cloth + left/right gripper export started. Press RightHand/GrabGrip again to stop.");
     }
 
     bool ValidateReferences()
