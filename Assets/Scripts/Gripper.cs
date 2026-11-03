@@ -6,6 +6,14 @@ public class Gripper : MonoBehaviour
     [Header("Cloth")]
     public TriangleMesh cloth;
 
+    [Header("Grasp frame")]
+    public Transform graspFrame;
+
+    private Transform Frame
+    {
+        get { return graspFrame != null ? graspFrame : transform; }
+    }
+
     [Header("Keyboard control")]
     public bool enableKeyboardTranslation = true;
     public bool enableKeyboardRotation = true;
@@ -47,9 +55,19 @@ public class Gripper : MonoBehaviour
 
     void Awake()
     {
+        if (graspFrame == null)
+        {
+            graspFrame = transform;
+        }
+
         // The Gripper object itself is the grasp box center.
-        transform.position = initialBoxCenter;
-        transform.rotation = Quaternion.identity;
+        Frame.localPosition = initialBoxCenter;
+        // Frame.rotation = Quaternion.identity;
+
+        Quaternion graspOrientation = Quaternion.Euler(0f, 90f, 0f);
+        Frame.localRotation = graspOrientation;
+
+
 
         // Visual box used to show the grasp region.
         if (graspBoxVisual != null)
@@ -142,7 +160,7 @@ public class Gripper : MonoBehaviour
         }
          if (motion.sqrMagnitude > 0.0f)
         {
-           transform.position += motion.normalized * translationSpeed * Time.deltaTime;
+           Frame.position += motion.normalized * translationSpeed * Time.deltaTime;
         }
 
     }
@@ -154,44 +172,44 @@ public class Gripper : MonoBehaviour
         // Yaw: rotate around world Y axis
         if (Input.GetKey(KeyCode.N))
         {
-            transform.Rotate(Vector3.up, -angle, Space.Self);
+            Frame.Rotate(Vector3.up, -angle, Space.Self);
         }
 
         if (Input.GetKey(KeyCode.M))
         {
-            transform.Rotate(Vector3.up, angle, Space.Self);
+            Frame.Rotate(Vector3.up, angle, Space.Self);
         }
 
         // Pitch: rotate around box local X axis
         if (Input.GetKey(KeyCode.B))
         {
-            transform.Rotate(Vector3.right, -angle, Space.Self);
+            Frame.Rotate(Vector3.right, -angle, Space.Self);
         }
 
         if (Input.GetKey(KeyCode.V))
         {
-            transform.Rotate(Vector3.right, angle, Space.Self);
+            Frame.Rotate(Vector3.right, angle, Space.Self);
         }
 
         // Roll: rotate around box local Z axis
         if (Input.GetKey(KeyCode.Comma))
         {
-            transform.Rotate(Vector3.forward, -angle, Space.Self);
+            Frame.Rotate(Vector3.forward, -angle, Space.Self);
         }
 
         if (Input.GetKey(KeyCode.Period))
         {
-            transform.Rotate(Vector3.forward, angle, Space.Self);
+            Frame.Rotate(Vector3.forward, angle, Space.Self);
         }
     }
 
     bool IsInsideBox(Vector3 worldPoint)
     {
-        Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
+        Vector3 localPoint = Frame.InverseTransformPoint(worldPoint);
         // Debug.Log("unity built in: " + localPoint);
         
         // Vector3 localPoint = worldPoint - transform.position;
-        // localPoint = Quaternion.Inverse(transform.rotation) * localPoint;
+        // localPoint = Quaternion.Inverse(Frame.Rotation) * localPoint;
         // Debug.Log("My function:" + localPoint1);
         
 
@@ -252,7 +270,7 @@ public class Gripper : MonoBehaviour
 
         // SQUEEZE:
             // Store the node in the gripper local frame at the moment of grasp.
-            Vector3 restLocal = transform.InverseTransformPoint(nodeWorldPosition);
+            Vector3 restLocal = Frame.InverseTransformPoint(nodeWorldPosition);
 
             Vector3 goalLocal = restLocal;
             if (enableSqueeze)
@@ -298,7 +316,7 @@ public class Gripper : MonoBehaviour
             localNodeOffsets[nodeIndex] = localOffset;
 
             // Convert the saved local offset back to world frame
-            Vector3 newWorldPosition = transform.TransformPoint(localOffset);
+            Vector3 newWorldPosition = Frame.TransformPoint(localOffset);
 
             cloth.DragHandle(nodeIndex, newWorldPosition);
         }

@@ -9,13 +9,13 @@ public class PythonConnection : MonoBehaviour
 {
 
     // Dependencies for conda env
-    public const string CondaEnvPath = @"C:\Users\maparicio\miniconda3\envs\cholmod_env";
-    public const string PythonDllName = "python311.dll";
-    public const string PythonScripts = @"C:\Users\maparicio\Documents\Abhilash Nayak\unity_clothilde\Assets\Scripts";
-
-    // public const string CondaEnvPath = @"C:\Users\abhil\miniconda3\envs\clothilde_env";
+    // public const string CondaEnvPath = @"C:\Users\maparicio\miniconda3\envs\cholmod_env";
     // public const string PythonDllName = "python311.dll";
-    // public const string PythonScripts = @"Z:\vs\clothilde-unity-iri\Assets\Scripts";
+    // public const string PythonScripts = @"C:\Users\maparicio\Documents\Abhilash Nayak\unity_clothilde\Assets\Scripts";
+
+    public const string CondaEnvPath = @"C:\Users\abhil\miniconda3\envs\clothilde_env";
+    public const string PythonDllName = "python311.dll";
+    public const string PythonScripts = @"Z:\IRI_2026\unity_clothilde\Assets\Scripts";
 
     // public const string CondaEnvPath = @"C:\Users\apari\miniconda3\envs\cholmod_env";
     // public const string PythonDllName = "python311.dll";
@@ -108,7 +108,7 @@ public class PythonConnection : MonoBehaviour
                 //                                   str: mesh.str);
 
                 GameObject targetObj = GameObject.Find("Table");
-                Table table = targetObj.GetComponent<Table>();
+                Table table = targetObj != null ? targetObj.GetComponent<Table>() : null;
                 meshPython.setSimulatorParameters(dt: mesh.dt,
                                                 //numIterSmooth: mesh.numIter,
                                                   sub_steps: mesh.sub_steps,
@@ -127,7 +127,7 @@ public class PythonConnection : MonoBehaviour
                                                   cusick: false,
                                                   from_unity: true);
 
-                if (table.generateTable) {
+                if (table != null && table.generateTable) {
                     table.PositionTable();
 
                     float[] dimensions = V3ToArray(table.dimensions);
@@ -147,6 +147,13 @@ public class PythonConnection : MonoBehaviour
                     GCHandle dHandle = GCHandle.Alloc(dimensions, GCHandleType.Pinned);
                     long dPtr = (long)dHandle.AddrOfPinnedObject();
                     meshPython.addTable(center: oPtr, dimensions: dPtr, mu: table.mu);
+                }
+                else if (targetObj == null)
+                {
+                    Debug.Log(
+                        "[PythonConnection] No Table found. " +
+                        "Running without table collision."
+                    );
                 }
             }
         }

@@ -77,7 +77,9 @@ public class TriangleMesh : MonoBehaviour
     //Options
     public bool testCusick = true;
     public bool profiling = true;
-    private string exportPath = @"C:\Users\maparicio\Documents\Abhilash Nayak\unity_clothilde\Assets\Exports";
+    // private string exportPath = @"C:\Users\maparicio\Documents\Abhilash Nayak\unity_clothilde\Assets\Exports";
+    private string exportPath = @"Z:\IRI_2026\unity_clothilde\Assets\Exports";
+
     private bool isExporting = true;
     private List<float> elapsedTime;
     private List<float> simulateTime;
@@ -373,6 +375,13 @@ public class TriangleMesh : MonoBehaviour
         connection = new PythonConnection(this);
         connection.InitializePython();
         meshPython = connection.ImportClothScript();
+
+
+        // Debug.Log(
+        // $"[TriangleMesh] Awake on {gameObject.name}. " +
+        // $"Python initialized: {PythonEngine.IsInitialized}. " +
+        // $"Cloth Python object: {(meshPython == null ? "NULL" : "OK")}"
+        // );
 
         PythonEngine.BeginAllowThreads();
     }

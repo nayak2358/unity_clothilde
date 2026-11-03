@@ -480,6 +480,7 @@
 "Assets/Scripts/DragHandle.cs"
 "Assets/Scripts/Exporter.cs"
 "Assets/Scripts/ExporterBin.cs"
+"Assets/Scripts/ExporterMouse.cs"
 "Assets/Scripts/GradientGenerator.cs"
 "Assets/Scripts/Gripper.cs"
 "Assets/Scripts/GripperVR.cs"
