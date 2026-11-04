@@ -32,26 +32,6 @@ Each controller can grasp a region of the cloth and manipulate the corresponding
 
 Individual cloth vertices can also be manipulated using the VR pointer interface.
 
-## Architecture
-
-The simulation loop is
-
-```text
-Unity interaction
-       ↓
-grasped vertices + target positions
-       ↓
-Python.NET / shared-memory interface
-       ↓
-Clothilde
-       ↓
-updated cloth configuration
-       ↓
-Unity rendering
-```
-
-Unity handles interaction, rendering, gripper poses, and data recording. Clothilde remains responsible for the cloth mechanics, constraints, collisions, and time integration.
-
 ## Installation
 
 ### 1. Clone Clothilde
