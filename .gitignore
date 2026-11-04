@@ -1,0 +1,89 @@
+# ============================================================
+# Unity generated folders
+# ============================================================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+
+# ============================================================
+# Unity generated files
+# ============================================================
+
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Unity crash reports
+sysinfo.txt
+*.stacktrace
+
+# ============================================================
+# IDEs
+# ============================================================
+
+.vs/
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# ============================================================
+# Operating system files
+# ============================================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ============================================================
+# Python
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*.pyo
+
+.venv/
+venv/
+env/
+clothilde_env/
+
+# ============================================================
+# Clothilde / trajectory output
+# ============================================================
+
+# Generated experiment recordings
+Assets/Exports/*
+!Assets/Exports/.gitkeep
+
+# Optional local datasets / recordings
+Recordings/
+recordings/
+Exports/
+exports/
+
+# ============================================================
+# Local configuration
+# ============================================================
+
+# Files containing machine-specific paths
+*.local
+*.local.json
+*.local.yaml
+*.local.yml
