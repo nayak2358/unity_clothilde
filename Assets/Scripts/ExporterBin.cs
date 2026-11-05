@@ -118,7 +118,7 @@ public class ExporterBin : MonoBehaviour
     {
         isExporting = false;
 
-        string path = Path.Combine(exportPath, "replay_cloth.bin");
+        string path = Path.Combine(exportPath, "replay_cloth2.bin");
         SaveReplayBinary(path);
 
         Debug.Log("Export stopped. File saved to: " + path);

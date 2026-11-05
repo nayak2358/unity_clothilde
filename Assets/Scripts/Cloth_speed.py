@@ -801,7 +801,7 @@ class Cloth:
                                rho = 0.1, delta = 0.1, alpha = 0.2,
                                kappa = 0.5*1e-4, kappa_bnd = 0.05*1e-4, 
                                str = 0.01*1e-4, shr = 10*1e-4, slf = 1*1e-4,
-                               mu_f = 0.2, mu_s = 0.35, thck = 0.95, max_mov= 0.1,
+                               mu_f = 0.2, mu_s = 0.35, thck = 0.95, max_mov= 0.25,
                                cusick=False, from_unity = False):
         #solver parameters
         self.frame_rate = dt #desired frame rate

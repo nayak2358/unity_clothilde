@@ -240,6 +240,8 @@ public class TriangleMesh : MonoBehaviour
     // previous methods (Lucia): Commented
     void CreateHandle() {        
         int[] idxArray = {0, numVertexHeight-1, (numVertexWidth-1)*numVertexHeight, (numVertexWidth-1)*numVertexHeight+numVertexHeight-1};
+        // int[] idxArray = {};
+
         if (allHandles) {
             numHandles = numVertexHeight * numVertexWidth;
             idxArray = new int[numHandles];
