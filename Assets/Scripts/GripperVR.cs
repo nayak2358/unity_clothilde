@@ -49,24 +49,34 @@ public class GripperVR : MonoBehaviour
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
 
-        graspFrame.localPosition = controllerLocalOffset;
+        // graspFrame.localPosition = controllerLocalOffset;
+        // graspFrame.localRotation = Quaternion.identity;
 
-        graspBoxVisual.localPosition = Vector3.zero;
-        graspBoxVisual.localScale = graspBoxSize;
+        // graspBoxVisual.localPosition = Vector3.zero;
+        // graspBoxVisual.localScale = graspBoxSize;
 
-        // gripperAssembly.transform.localPosition = gripperAssemblyOffsetDirection * t;
-        // gripperAssembly.transform.localScale = Vector3.one * gripperAssemblyScale;
         // float rotAngle = 90f;
-        // gripperAssembly.transform.localRotation = Quaternion.Euler(0, rotAngle, 0);
+        // Quaternion targetRotation = Quaternion.Euler(0, rotAngle, 0);
+
+        // // Rotate the offset direction first, then scale by t
+        // Vector3 rotatedOffset = targetRotation * gripperAssemblyOffsetDirection;
+
+        // gripperAssembly.transform.localRotation = targetRotation;
+        // gripperAssembly.transform.localPosition = rotatedOffset * t;
+        // gripperAssembly.transform.localScale = Vector3.one * gripperAssemblyScale;
 
         float rotAngle = 90f;
-        Quaternion targetRotation = Quaternion.Euler(0, rotAngle, 0);
+        graspFrame.localPosition = controllerLocalOffset;
+        graspFrame.localRotation = Quaternion.Euler(0, rotAngle, 0);
 
-        // Rotate the offset direction first, then scale by t
-        Vector3 rotatedOffset = targetRotation * gripperAssemblyOffsetDirection;
+        // grasp box aligned with the grasp frame
+        graspBoxVisual.localPosition = Vector3.zero;
+        graspBoxVisual.localRotation = Quaternion.identity;
+        graspBoxVisual.localScale = graspBoxSize;
 
-        gripperAssembly.transform.localRotation = targetRotation;
-        gripperAssembly.transform.localPosition = rotatedOffset * t;
+        // CAD gripper aligned with the grasp frame
+        gripperAssembly.transform.localRotation = Quaternion.identity;
+        gripperAssembly.transform.localPosition = gripperAssemblyOffsetDirection * t;
         gripperAssembly.transform.localScale = Vector3.one * gripperAssemblyScale;
 
     }

@@ -4,9 +4,9 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     [SerializeField] private string targetName = "MeshRenderer";
-    public Vector3 offset = new Vector3(1.2f, 0.9f, 0f);
+    public Vector3 offset = new Vector3(0.35f, 0.9f, 0.35f);
     public float mu = 0.3f;
-    public Vector3 dimensions = new Vector3(0.6f, 0.05f, 0.6f);
+    public Vector3 dimensions = new Vector3(0.4f, 0.04f, 0.4f);
     public bool generateTable = false;
 
     void Start()

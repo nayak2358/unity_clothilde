@@ -16,7 +16,8 @@ public class TriangleMesh : MonoBehaviour
     public int numVertexHeight = 20;
     public float gridWidth = 1.0f;
     public float gridHeight = 1.0f;
-    public Vector3 originPosition = new Vector3(0f, 1.5f, 0f);
+    public Vector3 originPosition = new Vector3(0f, 1.5f, 0f); // This sometimes flickers 
+    // (change accordingly, also add the same offset to the Table position)
     public bool doubleSided = true;
     public bool allHandles = true;
 
