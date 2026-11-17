@@ -69,7 +69,7 @@ public class TriangleMesh : MonoBehaviour
     private PythonConnection connection;
 
     // Saved parameters
-    private bool textureChanged = false;
+    // private bool textureChanged = false;
 
     // interpolation between current and target positions
     private Dictionary<int, Vector3> previousControlTargets = new Dictionary<int, Vector3>();
@@ -321,12 +321,53 @@ public class TriangleMesh : MonoBehaviour
             nodeIndex[i*3+2] = faces[i, 2];
 
         }
+        // meshUnity.vertices = vertices;
+        // meshUnity.triangles = nodeIndex;
+        // meshUnity.uv = uv;
+        // meshUnity.RecalculateNormals(); 
+        // meshUnity.RecalculateBounds();
+        // meshFilter.mesh = meshUnity;
+
+        ///
+        
         meshUnity.vertices = vertices;
-        meshUnity.triangles = nodeIndex;
         meshUnity.uv = uv;
-        meshUnity.RecalculateNormals(); 
+
+        // The first half of getFacesTri() is the top side.
+        // The second half is the duplicated back side.
+        int trianglesPerSide = numFaces / 2;
+
+        int[] topTriangles = new int[trianglesPerSide * 3];
+        int[] backTriangles = new int[trianglesPerSide * 3];
+
+        System.Array.Copy(
+            nodeIndex,
+            0,
+            topTriangles,
+            0,
+            topTriangles.Length
+        );
+
+        System.Array.Copy(
+            nodeIndex,
+            topTriangles.Length,
+            backTriangles,
+            0,
+            backTriangles.Length
+        );
+
+        // Two submeshes -> two material slots.
+        meshUnity.subMeshCount = 2;
+        meshUnity.SetTriangles(topTriangles, 0);
+        meshUnity.SetTriangles(backTriangles, 1);
+
+        meshUnity.RecalculateNormals();
         meshUnity.RecalculateBounds();
+
         meshFilter.mesh = meshUnity;
+
+        /// 
+    
 
         flatOutputPositions = new float[N * 3];
         outputBufferHandle = GCHandle.Alloc(flatOutputPositions, GCHandleType.Pinned);
@@ -505,10 +546,10 @@ public class TriangleMesh : MonoBehaviour
     // so they stay attached to the right nodes.
     private void loadPositionsFromMesh() {
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            textureChanged = true;
-        }
+        // if (Input.GetKeyDown(KeyCode.C))
+        // {
+        //     textureChanged = true;
+        // }
 
         float[] localFloatArray = flatOutputPositions;        
         Vector3[] meshVertices = new Vector3[N];
@@ -529,12 +570,12 @@ public class TriangleMesh : MonoBehaviour
                 meshVertices[i+N].z = localFloatArray[i*3 + 1];
                 meshVertices[i+N].y = localFloatArray[i*3 + 2];
 
-                if (textureChanged) {
-                    uv[i] = new Vector2(0.0f, 0.0f);
-                    uv[i+N] = new Vector2(1.0f, 1.0f);
-                }
+                // if (textureChanged) {
+                //     uv[i] = new Vector2(0.0f, 0.0f);
+                //     uv[i+N] = new Vector2(1.0f, 1.0f);
+                // }
             }
-            if (textureChanged) meshUnity.uv = uv;
+            // if (textureChanged) meshUnity.uv = uv;
         }
         meshUnity.vertices = meshVertices;
         meshUnity.RecalculateNormals(); 

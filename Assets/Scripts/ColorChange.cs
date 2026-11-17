@@ -12,7 +12,9 @@ public class ColorChange : MonoBehaviour
     void Start()
     {
         red_blue = GenerateTexture(new Color(1.0f, 0.0f, 0.0f), new Color(0.0f, 0.0f, 1.0f));
-        orange_blue = GenerateTexture(new Color(1.0f, 0.5f, 0.0f), new Color(0.0f, 0.0f, 1.0f));
+        // orange_blue = GenerateTexture(new Color(1.0f, 0.5f, 0.0f), new Color(0.0f, 0.0f, 1.0f));
+        orange_blue = GenerateTexture(new Color(242f/255f, 140f/255f, 40f/255f), new Color(0.0f, 0.0f, 1.0f));
+
     }
 
     Texture2D GenerateTexture(Color a, Color b)
@@ -27,8 +29,10 @@ public class ColorChange : MonoBehaviour
         {
             for (int x = 0; x < resolution; x++)
             {
+                // if (y < 10) colors[y * resolution + x] = a;
+                // else colors[y * resolution + x] = b;
+
                 if (y < 10) colors[y * resolution + x] = a;
-                else colors[y * resolution + x] = b;
             }
         }
 
