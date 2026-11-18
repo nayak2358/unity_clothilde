@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 public class TriangleMesh : MonoBehaviour
 {
     [Header("Grid Settings")]
-    public int numVertexWidth = 20;
-    public int numVertexHeight = 20;
-    public float gridWidth = 1.0f;
-    public float gridHeight = 1.0f;
+    public int numVertexWidth = 21;
+    public int numVertexHeight = 21;
+    public float gridWidth = 0.7f;
+    public float gridHeight = 0.7f;
     public Vector3 originPosition = new Vector3(0f, 1.5f, 0f);
     public bool doubleSided = true;
     public bool allHandles = true;
@@ -27,7 +27,7 @@ public class TriangleMesh : MonoBehaviour
     };
 
     //Runtime modifiable parameters
-    public int sub_steps = 8;
+    public int sub_steps = 4;
     // public int numIter = 1;
     public float dt = 1f/60f;
     public float tol = 0.008f;
