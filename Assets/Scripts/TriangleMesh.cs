@@ -19,6 +19,7 @@ public class TriangleMesh : MonoBehaviour
     public Vector3 originPosition = new Vector3(0f, 1.5f, 0f);
     public bool doubleSided = true;
     public bool allHandles = true;
+    public bool verticalCloth = false;
 
     public enum ClothType{
         Type1,
@@ -283,7 +284,12 @@ public class TriangleMesh : MonoBehaviour
             for (int y = 0; y < numVertexHeight; y++) {
                 float posX = x, posY = y;
                 posX /= (numVertexWidth-1); posY /= (numVertexHeight-1);
-                Vector3 worldPos = originPosition + new Vector3(posX*gridWidth, 0, posY*gridHeight);
+                // Vector3 worldPos = originPosition + new Vector3(posX*gridWidth, 0, posY*gridHeight);
+
+                Vector3 worldPos = originPosition + (verticalCloth 
+                ? new Vector3(posX * gridWidth, -posY * gridHeight, 0)
+                : new Vector3(posX * gridWidth, 0, posY * gridHeight)
+                );
 
                 vertices[cnt] = worldPos;
                 uv[cnt] = new Vector2(posX, posY);

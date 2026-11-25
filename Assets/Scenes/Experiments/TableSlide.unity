@@ -807,15 +807,15 @@ MonoBehaviour:
   typeCloth: 2
   rho: 0.1
   delta: 0.1
-  alpha: 0.3
-  kappa: 0.0001
-  kappa_bnd: 0.00001
-  str: 0.0001
-  shr: 0.0002
+  alpha: 0.2
+  kappa: 0.000001
+  kappa_bnd: 0.0000001
+  str: 0.00005
+  shr: 0.01
   mu_f: 0.2
   mu_s: 0.5
   thck: 1.2
-  smooth: 2
+  smooth: 0
   slf: 0.0001
   handlePrefab: {fileID: 7090687965099052303, guid: d1ebfd5a0962862488057ac5f13efe06, type: 3}
   testCusick: 1
